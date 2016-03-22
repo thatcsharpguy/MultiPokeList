@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 
 using Xamarin.Forms;
 using MultiPokeListView.ViewModels;
@@ -14,7 +15,12 @@ namespace MultiPokeListView
         {
             PokemonsViewModel = new PokemonsViewModel();
 
+			#if USE_XAML
+			MainPage = new NavigationPage(new PokemonListXamlPage());
+			#else
 			MainPage = new NavigationPage(new PokemonListPage());
+			#endif
+
         }
 
         protected override void OnStart()

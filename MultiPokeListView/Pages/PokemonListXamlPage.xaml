@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	xmlns:c="clr-namespace:MultiPokeListView.Controls" 
+	x:Class="MultiPokeListView.Pages.PokemonListXamlPage"
+	Title="Pokemons">
+	<ContentPage.ToolbarItems>
+		<ToolbarItem Name="Elegir" Command="{Binding GetSelectedItemsCommand}" />
+	</ContentPage.ToolbarItems>
+	<ContentPage.Content>
+		<ListView ItemsSource="{Binding Pokemons}">
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<c:PokemonSelectableCell 
+						Name="{Binding Item.Name}" 
+						Weight="{Binding Item.Weight}" 
+						Height="{Binding Item.Height}" />
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
+	</ContentPage.Content>
+</ContentPage>
