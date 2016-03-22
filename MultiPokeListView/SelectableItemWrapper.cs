@@ -1,5 +1,4 @@
-﻿
-namespace MultiPokeListView
+﻿namespace MultiPokeListView
 {
     public class SelectableItemWrapper<T>
     {

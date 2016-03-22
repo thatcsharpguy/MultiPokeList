@@ -31,7 +31,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SelectableItemWrapper.cs" />
     <Compile Include="Pokemon.cs" />
     <Compile Include="ViewModels\PokemonsViewModel.cs" />
     <Compile Include="App.cs" />
@@ -39,6 +38,7 @@
     <Compile Include="Controls\CheckBox.cs" />
     <Compile Include="Pages\PokemonListPage.cs" />
     <Compile Include="Pages\SelectedPokemonPage.cs" />
+    <Compile Include="SelectableItemWrapper.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="packages\Xamarin.Forms.1.3.5.6335\build\portable-win+net45+wp80+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('packages\Xamarin.Forms.1.3.5.6335\build\portable-win+net45+wp80+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />

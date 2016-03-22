@@ -83,22 +83,14 @@ namespace MultiPokeListView.ViewModels
         public ObservableCollection<SelectableItemWrapper<Pokemon>> Pokemons
         {
             get { return _pokemons; }
-            set
-            { 
-                _pokemons = value;
-                RaisePropertyChanged();
-            }
+            set { _pokemons = value; RaisePropertyChanged(); }
         }
 
 		private ObservableCollection<Pokemon> _selectedPokemons;
 		public ObservableCollection<Pokemon> SelectedPokemons
 		{
 			get { return _selectedPokemons ?? new ObservableCollection<Pokemon>(); }
-			private set
-			{
-				_selectedPokemons = value;
-				RaisePropertyChanged();
-			}
+			private set { _selectedPokemons = value; RaisePropertyChanged(); }
 		}
 
 		#region Commands
@@ -112,11 +104,8 @@ namespace MultiPokeListView.ViewModels
 					(_getSelectedItemsCommand = new Command(
 						async () =>
 						{
-							var selected = Pokemons
-								.Where(p => p.IsSelected)
-								.Select(p => p.Item)
-								.ToList();
-							SelectedPokemons = new ObservableCollection<Pokemon>(selected);
+                            SelectedPokemons = GetSelectedPokemons();
+                            // Navigation is not 
                             await App.Current.MainPage.Navigation.PushAsync(new SelectedPokemonPage());
 						}));
 			}
@@ -130,6 +119,23 @@ namespace MultiPokeListView.ViewModels
 		public event PropertyChangedEventHandler PropertyChanged;
 
         #endregion
+
+        ObservableCollection<Pokemon> GetSelectedPokemons()
+        {
+            var selected = Pokemons
+                .Where(p => p.IsSelected)
+                .Select(p => p.Item)
+                .ToList();   
+            return new ObservableCollection<Pokemon>(selected);
+        }
+
+        void SelectAll(bool select)
+        {
+            foreach (var p in Pokemons)
+            {
+                p.IsSelected = select;
+            }
+        }
 
         void RaisePropertyChanged([CallerMemberName] string propertyName = null)
         {
