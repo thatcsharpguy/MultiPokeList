@@ -63,12 +63,12 @@ namespace MultiPokeListView.Controls
                 }
             };
 
-			//var cb = new CheckBox();
-            //cellWrapper.Children.Add(cb, 0, 0);
-			var sw = new Switch();
-            sw.SetBinding(Switch.IsToggledProperty, "IsSelected");
+			var cb = new CheckBox();
+            cellWrapper.Children.Add(cb, 0, 0);
+			//var sw = new Switch();
+            cb.SetBinding(CheckBox.CheckedProperty, "IsSelected");
 
-			cellWrapper.Children.Add(sw, 0, 0);
+			//cellWrapper.Children.Add(sw, 0, 0);
             cellWrapper.Children.Add(infoLayout, 1, 0);
 
             View = cellWrapper;

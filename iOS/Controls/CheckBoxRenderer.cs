@@ -36,7 +36,7 @@ namespace MultiPokeListView.iOS.Controls
     /// <summary>
     /// The check box renderer for iOS.
     /// </summary>
-    public class CheckBoxRenderer : ViewRenderer<CheckBox, CheckBoxView>
+    public class CheckBoxRenderer : ViewRenderer<CheckBox, M13Checkbox>
 	{
 
         /// <summary>
@@ -55,50 +55,53 @@ namespace MultiPokeListView.iOS.Controls
             {
                 if (Control == null)
                 {
-                    var checkBox = new CheckBoxView (Bounds);
-                    checkBox.TouchUpInside += (s, args) => Element.Checked = Control.Checked;
+                    var checkBox = new M13Checkbox();
+                    checkBox.ChechedChanged += (s, args) => Element.Checked = args;
                     SetNativeControl (checkBox);
                 }
-                Control.LineBreakMode = UILineBreakMode.CharacterWrap;
-                Control.VerticalAlignment = UIControlContentVerticalAlignment.Center;
-                Control.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
-                Control.Checked = e.NewElement.Checked;
+                //Control.LineBreakMode = UILineBreakMode.CharacterWrap;
+//                Control.VerticalAlignment = UIControlContentVerticalAlignment.Center;
+//                Control.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
+                Control.SetCheckState(e.NewElement.Checked 
+                    ? MultiPokeListView.iOS.Controls.CheckState.Checked :
+                    MultiPokeListView.iOS.Controls.CheckState.Unchecked);
             }
 
-            Control.Frame = Frame;
-            Control.Bounds = Bounds;
+//            Control.Frame = Frame;
+//            Control.Bounds = Bounds;
         }
 
 
-        /// <summary>
-        /// Draws the specified rect.
-        /// </summary>
-        /// <param name="rect">The rect.</param>
-        public override void Draw(CoreGraphics.CGRect rect)
-        {
-            base.Draw(rect);
-        }
+//        /// <summary>
+//        /// Draws the specified rect.
+//        /// </summary>
+//        /// <param name="rect">The rect.</param>
+//        public override void Draw(CoreGraphics.CGRect rect)
+//        {
+//            base.Draw(rect);
+//        }
 
-        /// <summary>
-        /// Handles the <see cref="E:ElementPropertyChanged" /> event.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="PropertyChangedEventArgs"/> instance containing the event data.</param>
-        protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            base.OnElementPropertyChanged(sender, e);
 
-            switch (e.PropertyName)
-            {
-                case "Checked":
-                    Control.Checked = Element.Checked;
-                    break;
-                case "Element":
-                    break;
-                default:
-                    //System.Diagnostics.Debug.WriteLine(String.Format("Property change for {0} has not been implemented.", e.PropertyName));
-                    return;
-            }
-        }
+//        /// <summary>
+//        /// Handles the <see cref="E:ElementPropertyChanged" /> event.
+//        /// </summary>
+//        /// <param name="sender">The sender.</param>
+//        /// <param name="e">The <see cref="PropertyChangedEventArgs"/> instance containing the event data.</param>
+//        protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+//        {
+//            base.OnElementPropertyChanged(sender, e);
+//
+//            switch (e.PropertyName)
+//            {
+//                case "Checked":
+//                    Control.Checked = Element.Checked;
+//                    break;
+//                case "Element":
+//                    break;
+//                default:
+//                    //System.Diagnostics.Debug.WriteLine(String.Format("Property change for {0} has not been implemented.", e.PropertyName));
+//                    return;
+//            }
+//        }
     }
 }
