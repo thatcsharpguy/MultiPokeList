@@ -37,6 +37,15 @@ namespace MultiPokeListView.Controls
                     typeof(bool), 
                     typeof(CheckBox), 
                     false, BindingMode.TwoWay,propertyChanged: OnCheckedPropertyChanged);
+
+            /// <summary>
+            /// The checked state property.
+            /// </summary>
+            public static readonly BindableProperty EnabledProperty =
+                BindableProperty.Create("Enabled",
+                    typeof(bool),
+                    typeof(CheckBox),
+                    false, BindingMode.TwoWay, propertyChanged: OnEnabledPropertyChanged);
 		
 
             /// <summary>
@@ -45,11 +54,7 @@ namespace MultiPokeListView.Controls
             /// <value>The checked state.</value>
             public bool Checked
             {
-                get
-                {
-                    return (bool)GetValue(CheckedProperty);
-                }
-
+                get { return (bool)GetValue(CheckedProperty); }
                 set
                 {
                     if(this.Checked != value) {
@@ -59,7 +64,22 @@ namespace MultiPokeListView.Controls
                 }
             }
 
-
+            /// <summary>
+            /// Gets or sets a value indicating whether the control is checked.
+            /// </summary>
+            /// <value>The checked state.</value>
+            public bool Enabled
+            {
+                get { return (bool)GetValue(EnabledProperty); }
+                set
+                {
+                    if (this.Enabled != value)
+                    {
+                        this.SetValue(EnabledProperty, value);
+                        //this.CheckedChanged.Invoke(this, new EventArgs<bool>(value));
+                    }
+                }
+            }
 
             /// <summary>
             /// Called when [checked property changed].
@@ -69,8 +89,20 @@ namespace MultiPokeListView.Controls
             /// <param name="newvalue">if set to <c>true</c> [newvalue].</param>
             private static void OnCheckedPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
             {
-                var checkBox = (CheckBox) bindable;
+                var checkBox = (CheckBox)bindable;
                 checkBox.Checked = (bool)newvalue;
+            }
+
+            /// <summary>
+            /// Called when [enabled property changed].
+            /// </summary>
+            /// <param name="bindable">The bindable.</param>
+            /// <param name="oldvalue">if set to <c>true</c> [oldvalue].</param>
+            /// <param name="newvalue">if set to <c>true</c> [newvalue].</param>
+            private static void OnEnabledPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
+            {
+                var checkBox = (CheckBox)bindable;
+                checkBox.Enabled = (bool)newvalue;
             }
         }
     }
